@@ -41,6 +41,7 @@ function gridGenerator(input){
 	return res;
 }
 
+
 function join(arr, delimiter) {
 	var res = "";
 	if(arr.length === 0) { return res }
