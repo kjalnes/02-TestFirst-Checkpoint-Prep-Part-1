@@ -57,39 +57,36 @@ function join(arr, delimiter) {
 
 function paramify(obj) {
 	var res = [];
-	if(Object.keys(obj).length === 0) { return res.join('') }
 	for(var key in obj) {
 		if(obj.hasOwnProperty(key)) {
 			res.push(key + "=" + obj[key]);
 		}
 	}
 
-	res.sort();
-
 	if(res.length > 1) {
-		return	res.join('&')
+		return	join(res.sort(), '&')
 	} else {
-		return res.join('')
+		return join(res.sort(), '')
 	}
 }
 
 function paramifyObjectKeys(obj){
-	var res = ""
+	var res = [];
 	var array = Object.keys(obj).sort();	
 	if(array.length === 0) { return "" }
 
 	for(var i=0; i < array.length;i++) {
-		
-		res+= array[i] + "=" + obj[array[i]];
-		if(i !== array.length - 1) {
-			res+= '&'
-		}
+		res.push(array[i] + "=" + obj[array[i]]);
 	}
-	return res;
+
+	return res.join('&');
 }
 
 
 function renameFiles(arr) {
+
+	var res = [];
+	
 	// helper function to create new name
 	function findNewName(fileName, n) {
 		var newName = fileName + '(' + n + ')';
@@ -100,7 +97,6 @@ function renameFiles(arr) {
 		}
 	} 
 
-	var res = [];
 	for(var i=0; i < arr.length; i++) {
 		if(res.indexOf(arr[i]) !== -1) {
 			// recursive call to rename file if it already exists
